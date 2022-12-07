@@ -32,7 +32,8 @@ There are several python flask applications, named:
 - newsletter
 - users
 
-For each one, named $SERVICE_NAME, start them in a separate window like this:
+For each one, named $SERVICE_NAME, start them in a separate window like this.
+Note that the Python version should be at most 3.9 currently.
 
 	cd $SERVICE_NAME/src
 	python3 -m $SERVICE_NAME
@@ -58,7 +59,7 @@ Start the jaeger-all-in-one binary then navigate to the [jaeger application](htt
 
 ## databases
 
-Install mysql. (The following instructions are for ec2 linux 2)
+Install [MariaDB](https://mariadb.org/download). (The following instructions are for ec2 linux 2)
 
     sudo yum install mysql mariadb-server
     sudo systemctl start mariadb

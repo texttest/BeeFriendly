@@ -8,3 +8,4 @@ opentracing-instrumentation
 Flask-OpenTracing
 Flask-Cors
 selenium
+requests
