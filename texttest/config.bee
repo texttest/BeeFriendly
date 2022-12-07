@@ -1,6 +1,8 @@
 # Full path to the System Under Test (or Java Main Class name)
 executable:${TEXTTEST_HOME}/texttest/fixture.py
-interpreter:python3
+
+home_operating_system:nt
+interpreter:${TEXTTEST_HOME}/venv/Scripts/python.exe
 
 # Naming scheme to use for files for stdin,stdout and stderr
 filename_convention_scheme:standard
@@ -15,15 +17,11 @@ full_name:BeeFriendly
 copy_test_path:use_case.py
 
 [collate_file]
-start_page:start_page.html
-end_page:end_page.html
+*_page:*_page.html
 
 [collate_script]
-start_page:python3 ${TEXTTEST_HOME}/texttest/html2ascii/html2ascii.py
-end_page:python3 ${TEXTTEST_HOME}/texttest/html2ascii/html2ascii.py
+*_page:${TEXTTEST_HOME}/../uitext/html2ascii/html2ascii.py
 
 [run_dependent_text]
-start_page:client-id
-end_page:client-id
-start_page:\.[^.]+(\.jpg){REPLACE \1}
-end_page:\.[^.]+(\.jpg){REPLACE \1}
+*_page:client-id
+*_page:\.[^.]+(\.jpg){REPLACE \1}
