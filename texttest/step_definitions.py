@@ -42,18 +42,18 @@ def wait_until(condition):
 
 
 def select_garden_size(size):
-    garden_selector = Select(driver.find_element_by_id("select-garden-size"))
+    garden_selector = Select(driver.find_element(By.ID, "select-garden-size"))
     garden_selector.select_by_visible_text(size)
 
 
 def submit_garden_quizz():
-    submit_button = driver.find_element_by_id("submit-garden-quizz")
+    submit_button = driver.find_element(By.ID, "submit-garden-quizz")
     submit_button.click()
 
 
 def select_flowers(flowers: list):
     for flower in flowers:
-        checkbox_selector = driver.find_element_by_id(f"label_{flower}")
+        checkbox_selector = driver.find_element(By.ID, f"label_{flower}")
         checkbox_selector.click()
 
 
@@ -64,13 +64,13 @@ def wait_for_garden_quizz_response():
 
 
 def enter_contact_details(name, email):
-    name_field = driver.find_element_by_id("newsletter_name")
+    name_field = driver.find_element(By.ID, "newsletter_name")
     name_field.send_keys(name)
-    email_field = driver.find_element_by_id("newsletter_email")
+    email_field = driver.find_element(By.ID, "newsletter_email")
     email_field.send_keys(email)
 
 def submit_newsletter():
-    submit_button = driver.find_element_by_id("newsletter_submit")
+    submit_button = driver.find_element(By.ID, "newsletter_submit")
     submit_button.click()
 
 
