@@ -109,7 +109,7 @@
                 console.log(garden_data.selected_flowers)
                 const axios_instance = axios.create({
                     baseURL: 'http://localhost:3004',
-                    timeout: 1000,
+                    timeout: 5000,
                     headers: jaeger_baggage
                 })
                 var self = this
