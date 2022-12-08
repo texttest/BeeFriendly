@@ -4,7 +4,7 @@ from tracing import init_tracer, flask_to_scope
 import opentracing
 from opentracing.ext import tags
 from flask_opentracing import FlaskTracer
-
+import os
 
 app = Flask('greeting')
 init_tracer('greeting')
@@ -39,4 +39,5 @@ def format_greeting(name, title, description):
 
 
 if __name__ == "__main__":
-    app.run(port=3002)
+    port = 0 if "DYNAMIC_PORTS" in os.environ else 3002
+    app.run(port=port)

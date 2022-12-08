@@ -3,9 +3,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.schema import Column
 from sqlalchemy.types import String
+import os
 
-
-db_url = 'mysql+pymysql://root@localhost:3306/users'
+db_name = os.getenv("USERS_DB_NAME", "users")
+db_url = 'mysql+pymysql://root@localhost:3306/' + db_name
 engine = create_engine(db_url, echo=False)
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -21,3 +22,7 @@ class Person(Base):
     @staticmethod
     def get(name):
         return session.query(Person).get(name)
+    
+    def save(self):
+        session.add(self)
+        session.commit()

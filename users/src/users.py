@@ -4,10 +4,9 @@ import json
 from database import Person
 from tracing import init_tracer, flask_to_scope
 import opentracing
-from opentracing.ext import tags
 from opentracing_instrumentation.client_hooks import install_all_patches
 from flask_opentracing import FlaskTracer
-
+import os
 
 app = Flask('users')
 init_tracer('users')
@@ -24,6 +23,7 @@ def get_person_http(name):
                 raise Exception(f"{name}s are not kind to bees.")
             person = Person()
             person.name = name
+            person.save()
         else:
             person.description
         response = {
@@ -36,4 +36,5 @@ def get_person_http(name):
 
 
 if __name__ == "__main__":
-    app.run(port=3001)
+    port = 0 if "DYNAMIC_PORTS" in os.environ else 3001
+    app.run(port=port)

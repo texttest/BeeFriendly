@@ -1,4 +1,4 @@
-import sys
+import sys, os
 import json
 import requests
 from flask import Flask
@@ -32,7 +32,8 @@ def get_person(name):
     with opentracing.tracer.start_active_span(
         'get-person',
     ) as scope:
-        url = 'http://localhost:3001/getPerson/%s' % name
+        users_url = os.getenv("USERS_URL", 'http://localhost:3001')
+        url = f'{users_url}/getPerson/{name}'
         res = _get(url)
         person = json.loads(res)
         scope.span.log_kv({
@@ -47,7 +48,8 @@ def format_greeting(person):
     with opentracing.tracer.start_active_span(
         'format-greeting',
     ):
-        url = 'http://localhost:3002/formatGreeting'
+        greeting_url = os.getenv("GREETING_URL", 'http://localhost:3002')
+        url = greeting_url + '/formatGreeting'
         return _get(url, params=person)
 
 
@@ -58,4 +60,5 @@ def _get(url, params=None):
 
 
 if __name__ == "__main__":
-    app.run(port=3010)
+    port = 0 if "DYNAMIC_PORTS" in os.environ else 3010
+    app.run(port=port)
