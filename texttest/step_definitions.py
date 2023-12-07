@@ -16,12 +16,10 @@ def setup(url):
     if delay:
         options.add_argument("--start-maximized")
     else:
-        options.add_argument("headless")
+        options.add_argument("--headless=new")
 
-    d = options.to_capabilities()
-    d['loggingPrefs'] = {"browser": "ALL"}
-
-    driver = webdriver.Chrome(desired_capabilities=d)
+    options.set_capability('goog:loggingPrefs', {'browser':'ALL'})
+    driver = webdriver.Chrome(options=options)
     driver.get(url)
     print_html_page("start_page")
 
